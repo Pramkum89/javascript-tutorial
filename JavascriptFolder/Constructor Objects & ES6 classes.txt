@@ -1,0 +1,40 @@
+// Constructor object
+
+const Mobile = function (brand, price, launchDate) {
+  this.brand = brand;
+  this.price = price;
+  this.launchDate = new Date(launchDate);
+};
+
+const s2 = new Mobile("Samsung", "25k", "01/01/2012");
+console.log(s2);
+
+const onePlus = new Mobile("OnePlus", "35K", "01.01,2020");
+console.log(onePlus);
+
+// Prototypes
+Mobile.prototype.ram = "4GB";
+Mobile.prototype.freeAccessories = "Bullet earphones";
+
+Mobile.prototype.getLaunchYear = function () {
+  return this.launchDate.getFullYear();
+};
+console.log(s2.getLaunchYear());
+console.log(onePlus.getLaunchYear());
+
+// ES6 classes
+class Mobile2 {
+  constructor(brand, price, launchdate) {
+    this.brand = brand;
+    this.price = price;
+    this.launchDate = new Date(launchdate);
+  }
+  ram = "8gb";
+  getLaunchMonth() {
+    return this.launchDate.getFullYear();
+  }
+}
+
+const v14 = new Mobile2("Vivo", "5K", "01/06/2023");
+console.log(v14);
+console.log(v14.getLaunchMonth());

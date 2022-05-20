@@ -1,0 +1,97 @@
+// Async Await in Javascript
+
+//using Promises
+const userLogin = () => {
+  console.log("Enter username and password");
+  let username = prompt("Enter username: ");
+  let password = prompt("Enter password");
+
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log("Performing User Authentication");
+      if (username === "Pramod" && password === "Pramod") {
+        resolve("Authentication success!");
+      } else {
+        reject("Authentication failed!");
+      }
+    }, 1000);
+  });
+};
+
+function goToHomePage(userAuthStatus) {
+  return Promise.resolve(`Go to Home page as : ${userAuthStatus}`);
+}
+
+userLogin()
+  .then((response) => {
+    console.log("Validated user!");
+    console.log(response);
+    return goToHomePage(response);
+  })
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+Output:
+Enter username and password
+Performing User Authentication
+Validated user!
+Authentication success!
+Go to Home page as : Authentication success!
+
+--
+
+// using async await
+async function performTask() {
+  try {
+    const response = await userLogin();
+    console.log("Validated user");
+    const res = await goToHomePage(response);
+    console.log(res);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+performTask();
+
+Output:
+Enter username and password
+Performing User Authentication
+Validated user
+Go to Home page as : Authentication success!
+
+--
+IMP***: Which is better : Promises or async await?
+
+const makeApiCall = (time) => {
+  return () =>
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve("This api executed in : " + time);
+      }, time);
+    });
+};
+
+const multiApiCalls = [makeApiCall(1000), makeApiCall(2000), makeApiCall(500)];
+
+//using promises
+Promise.all(multiApiCalls).then((values) => {
+  console.log(values);
+});
+
+=> all api requests are carried out at same time. Less time taken.
+
+//using async await
+(async function () {
+  for (let request of multiApiCalls) {
+    console.log(await request());
+  }
+})();
+
+=> It will wait for one api requests to be completed, to execute other apis . apis are carried out one after another. Takes more time.
+
+Hint: async await should be handled diligently together with promises based on situation.

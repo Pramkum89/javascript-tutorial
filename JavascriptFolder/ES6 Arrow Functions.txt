@@ -1,0 +1,77 @@
+ES6 arrow functions:
+
+Benefits:
+1. compact & concise code
+2. allows us to use context of this keyword lexically
+
+// Arrow functions
+
+// Normal functions
+// function displayName(name){
+//   return name
+// }
+
+// Arrow function syntax
+let displayName = (name,name2) => name + name2;
+
+console.log(displayName("Pramod Kumar", " CK "));
+
+--
+// Arrow functions
+
+// Normal functions
+// function multiply(a,b){
+//   return a*b
+// }
+
+// Arrow function syntax
+let multiply = (a, b) => a * b;
+
+let add = (a, b) => {
+  var c = a + b;
+  return c;
+};
+
+console.log(multiply(5, 4));
+
+console.log(add(5, 4));
+
+// Anonymous functions
+// Ex: setTimeout
+setTimeout(function () {
+  console.log("Timeout Called after 1 sec!");
+}, 1000);
+
+// Arrow functions: setTimeout
+let cb = () => {
+  return console.log("Callback called after 1s");
+};
+setTimeout(cb, 1000);
+// Lexical scope of this
+
+let person = {
+  name: "Pramod",
+  displayName: function(){
+    // let self = this
+    console.log(this);
+    console.log(this.name);
+
+    setTimeout(()=>{
+      console.log(this)
+      console.log(this.name)
+    },3000)
+  },
+};
+
+person.displayName()
+
+
+IMP***
+1. Arrow function cannot be used in displayName function in above code
+2. You cannot use new keyword when using arrow function
+
+--
+let Person = () => {};
+
+console.log(new Person());
+

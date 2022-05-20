@@ -1,0 +1,49 @@
+//ES6 Default parameters
+
+function multiply(a,b=4){
+  console.log(b)
+  // console.log(isNaN(b))
+  // b = b || 4
+  return a*b
+}
+
+console.log(multiply(2)) // 8
+console.log(multiply(2, null)) //0
+
+--
+// Default parameters
+
+function makeApiCall(url, method ="GET") {
+  // if (!method) {
+  //   method = "GET";
+  // }
+  console.log("Url : " + url); // www.google.com
+  console.log("Method : " + method); //GET
+}
+
+makeApiCall("www.google.com",undefined);
+
+--
+// Default parameters
+
+function Employee(id) {
+  this.id = id;
+}
+
+function generateEmployeeId() {
+  return Math.floor(Math.random() * 999);
+}
+
+function tagEmployee(employee = new Employee(generateEmployeeId())) {
+  employee.department = "User Experience";
+  return employee;
+}
+
+const employee = new Employee(generateEmployeeId());
+console.log(employee);
+
+console.log(tagEmployee(new Employee(generateEmployeeId())));
+console.log(tagEmployee(new Employee(generateEmployeeId())));
+console.log(tagEmployee(employee));
+console.log("Default values illustration");
+console.log(tagEmployee());

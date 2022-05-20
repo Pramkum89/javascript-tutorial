@@ -1,0 +1,41 @@
+// Synchronous and Asynchronous programming
+
+// synchronous code
+console.log("Task1")
+console.log("Task2")
+console.log("Task3")
+console.log("Task4")
+
+====
+// Blocking the code in synchronous programming
+
+console.log("Start the operation")
+
+function sleep(milliseconds){
+  let start= new Date().getTime()
+  console.log("operation is running..")
+  while(new Date().getTime() < start + milliseconds){
+    console.log("..in progress") //Blocked
+    // 
+  }
+  console.log("Operation is completed!") //Blocked
+}
+sleep(3000)
+console.log("Do something else :-P !")
+
+====
+// Asynchronous code
+console.log("Start the operation");
+
+function sleep(milliseconds) {
+  console.log("operation is running..");
+  setTimeout(() => {
+    console.log("Operation is completed!");
+  }, 3000);
+}
+sleep(3000);
+console.log("Do something else :-P !");
+
+IMP***
+- Javascript is a synchronous single threaded language.
+- Asynchronous in Javascript can be carried out by callbacks, promises, async await operations.

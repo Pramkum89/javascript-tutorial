@@ -1,0 +1,109 @@
+// ***this keyword usage
+
+// Outside function
+console.log(this)
+
+this.name="Dipesh"
+
+console.log(this.name)
+console.log(window.name)
+console.log(name)
+
+O/P:
+Window {window: Window, self: Window, document: document, name: 'Dipesh', location: Location, …}
+
+---
+// Inside a function
+
+function checkThis(){
+  console.log(this)
+}
+
+checkThis()
+O/P:
+Window {window: Window, self: Window, document: document, name: 'Dipesh', location: Location, …}
+
+--
+// Inside an object
+
+const person = {
+  name: "Pramod",
+  checkThis: function () {
+    console.log(this);
+    console.log("inside person object");
+  },
+};
+
+person.checkThis()
+console.log(person)
+console.log(person.checkThis())
+
+console.log("Without a calling context")
+const funct = person.checkThis
+funct()
+
+---
+// use strict is used to stabilize this keyword inside functions. It removes default this context.
+
+// ***this keyword usage
+
+// Inside an object
+
+const person = {
+  name: "Pramod",
+  checkThis: function () {
+    "use strict";
+    console.log("inside checkThis function");
+    console.log(this);
+
+    function checkThisAgain() {
+      this.name = "Dipesh";
+      console.log("inside checkThisAgain function");
+      console.log(this);
+    }
+    checkThisAgain();
+    console.log(this.name);
+    console.log(window.name);
+  },
+};
+
+person.checkThis();
+console.log(person);
+console.log(person.checkThis());
+
+console.log("Without a calling context");
+const funct = person.checkThis;
+funct();
+
+
+-----
+//Another way of stabizing this keyword is assiginit it to self, vm, that variable; always points to the object 
+
+Ex: let self  =  this
+
+
+const person = {
+  name: "Pramod",
+  checkThis: function () {
+    let self = this
+    console.log("inside checkThis function");
+    console.log(self);
+
+    function checkThisAgain() {
+      self.name = "Dipesh";
+      console.log("inside checkThisAgain function");
+      console.log(self);
+    }
+    checkThisAgain();
+    console.log(self.name);
+    console.log(window.name);
+  },
+};
+
+person.checkThis();
+console.log(person);
+console.log(person.checkThis());
+
+console.log("Without a calling context");
+const funct = person.checkThis;
+funct();

@@ -1,0 +1,53 @@
+// Array of Objects
+
+let employees = [
+  {
+    id: 101,
+    fname: "Pramod",
+    lname: "Kumar",
+    age: 32,
+  },
+  {
+    id: 102,
+    fname: "Chaithra",
+    lname: "KL",
+    age: 27,
+  },
+  {
+    id: 103,
+    fname: "Kumar",
+    lname: "C",
+    age: 62,
+    address: [
+      {
+        city: "Bangalore",
+        state: "Karnataka",
+      },
+      {
+        city: "Arsikere",
+        state: "Kerala",
+      },
+    ],
+    skills: ["Grocery", "Chemicals", "Kirana"],
+  },
+];
+
+console.log(employees);
+
+console.log(employees[1]);
+console.log(employees[2].address.state);
+
+console.log(employees[2].address[1].city)
+
+// Converting array of objects into JSON string for backend
+console.log("---Converting array of objects into JSON string for backend---")
+console.log(employees)
+
+let employeeJSON =  JSON.stringify(employees)
+console.log(employeeJSON)
+
+// Converting JSON array into array of object for front end processing
+console.log("Employee JSON")
+console.log(employeeJSON)
+let employeeARRAY = JSON.parse(employeeJSON)
+console.log(employeeARRAY)

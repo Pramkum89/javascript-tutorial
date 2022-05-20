@@ -1,0 +1,82 @@
+// Loops
+
+let employees = [
+  {
+    id: 101,
+    fname: "Pramod",
+    lname: "Kumar",
+    age: 32,
+  },
+  {
+    id: 102,
+    fname: "Chaithra",
+    lname: "KL",
+    age: 17,
+  },
+  {
+    id: 103,
+    fname: "Kumar",
+    lname: "C",
+    age: 62,
+    address: [
+      {
+        city: "Bangalore",
+        state: "Karnataka",
+      },
+      {
+        city: "Arsikere",
+        state: "Kerala",
+      },
+    ],
+    skills: ["Grocery", "Chemicals", "Kirana"],
+  },
+];
+
+console.log(employees);
+
+// ***LOOPS
+// for loop
+for (let i = 0; i < employees.length; i++) {
+  console.log(employees[i].address);
+}
+
+// while loop
+let j =0
+while(j<employees.length){
+  console.log(employees[j].age)
+  j++;
+}
+
+// for of loop
+for(let employee of employees){
+  console.log(employee.lname)
+}
+
+// ***Higher Order Array Methods
+
+// FOR EACH
+employees.forEach(function (emp) {
+  console.log(`${emp.fname} ${emp.age}`);
+});
+
+// MAP
+const empLastNames = employees.map(function (empl) {
+  return empl.lname;
+});
+console.log(empLastNames);
+
+//FILTER
+const empMajor = employees.filter(function (empm) {
+  return empm.age > 18;
+});
+console.log(empMajor);
+
+// CHAINING
+const empMajorFname = employees
+  .filter(function (empf) {
+    return empf.age > 18;
+  })
+  .map(function (empf) {
+    return empf.fname;
+  });
+console.log(empMajorFname);

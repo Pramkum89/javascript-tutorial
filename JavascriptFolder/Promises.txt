@@ -1,0 +1,159 @@
+// Promises
+
+const promise = new Promise((resolve, reject) => {
+  console.log("Async task operation performed!");
+  if (true) {
+    resolve();
+  } else {
+    reject();
+  }
+});
+
+promise.then(
+  () => {
+    console.log("Passed");
+  },
+  () => {
+    console.log("Failed");
+  }
+);
+
+Output: Passed
+
+--
+// Promises
+
+const promise = new Promise((resolve, reject) => {
+  console.log("Async task operation performed!");
+  if (false) {
+    const person = { name: "Pramod" };
+    resolve(person);
+  } else {
+    const error = { errorCode: 503 };
+    reject(error);
+  }
+});
+
+promise
+  .then(
+    (val) => {
+      console.log(val);
+    }
+    // (err) => {
+    //   console.log(err);
+    // }
+  )
+  .catch(() => {
+    console.log("Failed : catch block");
+  })
+  .finally(() => {
+    console.log("Finally block");
+  });
+
+Output: 
+Async task operation performed!
+Failed : catch block
+Finally block
+
+====
+// Already resolved/rejected promise
+let p1 = Promise.resolve("Task execution done");
+let p2 = Promise.reject("Task execution failed");
+
+p1.then((val) => {
+  console.log(val);
+});
+
+p2.then((val2) => {
+  console.log(val2);
+}).catch((err) => {
+  console.log(err);
+});
+
+IMP***:
+- By default promises are asynchronous in nature while callbacks are synchronous, can be made asynchronous by using setTimeout() function.
+
+====
+// Convert function from callback to Promise
+
+// Callback function
+function asyncTask(cb) {
+  cb();
+}
+
+asyncTask(() => {
+  console.log(name);
+});
+const name = "Pramod";
+
+Output: Error
+
+// Promise function
+function asyncTask() {
+  return Promise.resolve();
+}
+
+asyncTask().then(() => {
+  console.log(name);
+});
+
+const name = "Pramod";
+
+Output: Pramod
+
+--
+// Chaining of Promises
+
+let p = Promise.reject("Done!");
+
+p.then((val) => {
+  console.log(val);
+  return "Done2!";
+})
+  .then((val) => {
+    console.log(val);
+    return "Done3!";
+  })
+  .then((val) => {
+    console.log(val);
+  })
+  .catch(() => {
+    console.log("Failed!");
+  });
+  
+  --
+  // Promises : all and race
+  // Below example gives illustration of asynchronous behavior 
+  
+
+const makeApiCall = (time) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("This api executed in : " + time);
+    }, time);
+  });
+};
+
+makeApiCall(3000).then((val) => {
+  console.log(val);
+});
+
+makeApiCall(1000).then((val) => {
+  console.log(val);
+});
+
+makeApiCall(2000).then((val) => {
+  console.log(val);
+});
+
+const multiApiCalls = [makeApiCall(1000), makeApiCall(2000), makeApiCall(500)];
+
+Promise.all(multiApiCalls).then((values) => {
+  console.log(values);
+});
+
+Promise.race(multiApiCalls).then((val) => {
+  console.log(val);
+});
+
+  

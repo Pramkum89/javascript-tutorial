@@ -1,0 +1,119 @@
+// Destructuring in JAVASCRIPT
+
+// Objects
+
+const employee = {
+  fname: "Pramod",
+  id: 719762,
+  age: 32,
+  department: "IOT",
+  address: {
+    city: "Bangalore",
+    country: "India",
+  },
+};
+
+// const name = employee.name;
+// const age = employee.age;
+
+// ES6 Destructuring
+const { fname: fullname = "Ashish", age: dob } = employee;
+
+console.log(fullname);
+console.log(dob);
+
+--
+const {
+  address: { country:ctry },
+} = employee;
+
+console.log(ctry);
+
+--
+// Destructuring in functions
+function display({age, fname}){
+  console.log(`Employee name is ${fname} and Employee age is: ${age}`)
+}
+
+display(employee)
+
+===============
+// Arrays
+
+const fruits = ["Apple", "Mango", "Pine Apple", "Guava"];
+
+const app = fruits[0];
+const mang = fruits[1];
+
+console.log(app);
+console.log(mang);
+
+--
+
+const fruits = ["Apple", "Mango", "Pine Apple", "Guava", "Strawberry"];
+
+const [fruit1, , fruit3, ...rest] = fruits;
+console.log(fruit1);
+console.log(fruit3);
+console.log(rest)
+
+======
+// Arrays of Objects
+
+const groceryList = [
+  { item: "Apples", price: "24$", category: "Fruit" },
+  { item: "Tomato", price: "35$", category: "Vegetable" },
+  { item: "Mango", price: "4$", category: "Fruit" },
+  { item: "Cabbage", price: "5$", category: "Vegetable" },
+  { item: "Guava", price: "14$", category: "Fruit" },
+  { item: "Beans", price: "54$", category: "Vegetable" },
+];
+
+console.log(groceryList[1].item);
+const [, { price: amt }, , ...rest] = groceryList;
+console.log(amt);
+console.log(rest);
+
+const [{ category: type }] = rest;
+console.log(type);
+
+=========
+// Objects of an array
+
+const company = {
+  name: "Google",
+  location: ["India", "USA", "China"],
+};
+console.log(company.location[1])
+
+const {location:[,loc]} = company
+console.log(loc)
+
+--
+
+// Array of arrays
+const users = [
+  ["Pramod", "Kumar"],
+  ["Chaithra", "KL"],
+  ["Sujatha", "YR"],
+];
+// Output:
+[
+  {
+    firstName: "Pramod",
+    lastName: "Kumar",
+  },
+  {
+    firstName: "Chaithra",
+    lastName: "KL",
+  },
+  {
+    firstName: "Sujatha",
+    lastName: "YR",
+  },
+];
+
+const usersObj = users.map(([firstName, lastName]) => {
+  return { firstName, lastName };
+});
+console.log(usersObj);

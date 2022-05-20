@@ -1,0 +1,83 @@
+//Callback function
+
+- Callback function is a function which takes function as an argument and gets executed at later point of time.
+
+//Synchronous callback
+
+console.log("Task started");
+function asyncTask(cb) {
+  console.log("Task running");
+  cb();
+}
+
+asyncTask(() => console.log("Pramod"));
+console.log("Task completed");
+
+--
+// Error Handling in Callback
+// first argument is the error, second argument is data
+// Nodejs implementation: Error First callback
+
+function asyncTaskErr(cb) {
+  setTimeout(cb, 0);
+}
+
+asyncTaskErr((err, data) => {
+  if (err) {
+    throw err;
+  } else {
+    console.log("data : " + data);
+  }
+});
+
+--
+function asyncTaskErr(cb) {
+  setTimeout(() => {
+    cb(null, "This is callback handling in Node.js");
+  }, 0);
+}
+
+asyncTaskErr((err, data) => {
+  if (err) {
+    throw err;
+  } else {
+    console.log("data : " + data);
+  }
+});
+
+Output: data : This is callback handling in Node.js
+
+---
+// Callback hell
+
+function asyncTask(cb) {
+  setTimeout(() => {
+    cb(null, "This is data from server!");
+  }, 0);
+}
+
+function makeApiCall(cb) {
+  setTimeout(() => {
+    console.log("This is async api task execution!");
+  }, 0);
+}
+
+makeApiCall(() => {
+  makeApiCall(() => {
+    asyncTask(() => {
+      asyncTask(() => {
+        asyncTask(() => {
+          makeApiCall(() => {
+            asyncTask(() => {
+              asyncTask(() => {});
+            });
+          });
+        });
+      });
+    });
+  });
+});
+
+IMP***:
+- Chaining of callbacks results in a nasty code and is not readable & difficult to maintain code. This is called Callback hell.
+- Usage of Promises, async await results in better handling of callbacks for asynchronous activity.
